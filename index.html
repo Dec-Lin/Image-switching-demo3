@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>缩略图图片转换</title>
+    <link rel="stylesheet" href="./style.css">
+
+    <script>
+        window.onload = function () {
+            var oDiv = document.getElementById('pic');
+            var oImg = document.getElementById('img');
+            //上一张，下一张
+            var oLast = document.getElementById('last');
+            var oNext = document.getElementById('next');
+            var oUl = document.getElementById('ul1');
+            var oLi = document.getElementsByTagName('li');
+
+            //图片路径
+            var arrUrl = ['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg', 'img/5.jpg'];
+            var num = 0
+
+
+            for (var i = 0; i < arrUrl.length; i++) {
+                //为每个li添加索引值
+                oLi[i].index = i
+                //点击改变li背景色
+                oLi[i].onclick = function () {
+                    for (var i = 0; i < arrUrl.length; i++) {
+                        oLi[i].className = ''
+                        //点击li切换图片
+                        oImg.src = arrUrl[this.index]
+                    }
+
+                    this.className = 'active'
+                }
+
+                function fn1() {
+                    for (i = 0; i < arrUrl.length; i++) {
+                        oLi[i].className = ''
+                    }
+                }
+                function fn() {
+                    for (i = 0; i < arrUrl.length; i++) {
+                        oLi[num].className = 'active'
+                    }
+                }
+
+
+
+
+
+                //鼠标移入展示缩略图
+                oLi[i].onmouseover = function () {
+                    for (var i = 0; i < arrUrl.length; i++) {
+                        oLi[i].getElementsByTagName('img')[0].style.display = 'none'
+
+                    }
+                    this.getElementsByTagName('img')[0].style.display = 'block'
+                }
+                //鼠标移出收起缩略图
+                oLi[i].onmouseout = function () {
+                    this.getElementsByTagName('img')[0].style.display = 'none'
+                }
+
+            }
+            //点击切换下一张图片
+            oNext.onclick = function () {
+                num++;
+                if (num > arrUrl.length - 1) {
+                    num = 0
+                }
+                oImg.src = arrUrl[num]
+                fn1()
+                fn()
+            }
+            //点击切换上一张图片
+            oLast.onclick = function () {
+                num--;
+                if (num == -1) {
+                    num = arrUrl.length - 1
+                }
+                oImg.src = arrUrl[num]
+                fn1()
+                fn()
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+</head>
+
+<body>
+    <div id="wrap">
+
+        <div id="pic">
+            <span>带缩略图的图片转换</span>
+            <input id="last" type="button" value="<">
+            <input id="next" type="button" value=">">
+            <img id="img" src="img/1.jpg">
+            <ul id="ul1">
+                <li>
+                    <img src="img/1.jpg">
+                </li>
+
+                <li>
+                    <img src="img/2.jpg">
+                </li>
+
+                <li>
+                    <img src="img/3.jpg">
+                </li>
+
+                <li>
+                    <img src="img/4.jpg">
+                </li>
+
+                <li>
+                    <img src="img/5.jpg">
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</body>
+
+</html>
